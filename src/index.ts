@@ -1,10 +1,20 @@
+// Author: Igor Dimitrijević (@igorskyflyer)
+
+const rxMarkdown: RegExp = /^[ \t]{0,3}#{1,6}[ \t]+.*?(?:[ \t]+#*)?[ \t]*$/gm
+const rxMarkdownCode: RegExp =
+  /^[ \t]{0,3}#{1,6}[ \t]+(.+?)(?:[ \t]+#*)?[ \t]*$/gm
+
 /**
  * Strips Markdown headings completely.
  * @param {string} value The Markdown string to process.
  * @returns {string} The processed string.
  */
 export function stripHeadings(value: string): string {
-  return value.length === 0 ? '' : value.replace(/#{1,6}.+/gm, '').trim()
+  if (typeof value !== 'string' || value.length === 0) {
+    return ''
+  }
+
+  return value.replace(rxMarkdown, '').trim()
 }
 
 /**
@@ -13,5 +23,9 @@ export function stripHeadings(value: string): string {
  * @returns {string} The processed string.
  */
 export function stripHeadingsCode(value: string): string {
-  return value.length === 0 ? '' : value.replace(/#{1,6}\s*(.+)/gm, '$1').trim()
+  if (typeof value !== 'string' || value.length === 0) {
+    return ''
+  }
+
+  return value.replace(rxMarkdownCode, '$1').trim()
 }
