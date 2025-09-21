@@ -1,20 +1,20 @@
-import { assert as chai } from 'chai'
-import { stripHeadings, stripHeadingsCode } from './../src/index'
+import { assert, describe, it } from 'vitest'
+import { stripHeadings, stripHeadingsCode } from './../src/index.js'
 
-describe('🧪 strip-headings tests 🧪', () => {
+describe('🧪 strip-md-headings tests 🧪', () => {
   it('#1 should return true', () => {
-    chai.isEmpty(stripHeadings(''))
+    assert.isEmpty(stripHeadings(''))
   })
 
   it('#2 should return true', () => {
-    chai.isEmpty(stripHeadingsCode(''))
+    assert.isEmpty(stripHeadingsCode(''))
   })
 
   it('#3 should return empty', () => {
-    chai.isEmpty(stripHeadings('## Hello'))
+    assert.isEmpty(stripHeadings('## Hello'))
   })
 
   it('#4 should return Hello', () => {
-    chai.equal(stripHeadingsCode('## Hello'), 'Hello')
+    assert.equal(stripHeadingsCode('## Hello'), 'Hello')
   })
 })
